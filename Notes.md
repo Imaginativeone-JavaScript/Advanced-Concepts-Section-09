@@ -1,0 +1,29 @@
+- [ ] Section 9: Asynchronous JavaScript 00/011 | 1hr 56min
+	- [ ] 133. Section Overview | 5min Resources
+	- [ ] 134. Quick Note: Upcoming Videos | 1min
+	- [ ] 135. How JavaScript Works | 24min
+	- [ ] 136. Promises | 22min
+	- [ ] 137. ES8 - Async Await | 15min
+	- [ ] 138. ES9 (ES2018) | 5min
+	- [ ] 139. ES9 (ES2018) - Async | 11min
+	- [ ] 140. Job Queue | 7min Resources
+	- [ ] 141. Parallel, Sequence and Race | 10min Resources
+	- [ ] 142. ES2020: allSettled() | 4min
+	- [ ] 143. Threads, Concurrency and Parallelism | 11min Resources
+- [ ] Section 10: Modules In JavaScript 00/07 | 53min
+	- [ ] 144. Section Overview | 3min Resources
+	- [ ] 145. What Is A Module? | 11min Resources
+	- [ ] 146. Module Pattern | 13min
+	- [ ] 147. Module Pattern Pros and Cons | 5min
+	- [ ] 148. CommonJS, AMD, UMD | 10min
+	- [ ] 149. ES6 Modules | 9min Resources
+	- [ ] 150. Section Review | 2min
+- [ ] Section 11: Error Handling 00/08 | 43min
+	- [ ] 151. Section Overview | 1min Resources
+	- [ ] 152. Errors In JavaScript | 9min Resources
+	- [ ] 153. Try Catch | 10min Resources
+	- [ ] 154. Async Error Handling | 13min Resources
+	- [ ] 155. Async Error Handling 2 | 4min Resources
+	- [ ] 156. Exercise: Error Handling | 1min Resources
+	- [ ] 157. Extending Errors | 5min Resources
+	- [ ] 158. Section Review | 1min
