@@ -59,18 +59,15 @@ console.log(rejectedPromise);
 ### settlingPromises(iterable)
 
 ```javascript
-const settlingPromises = Promise.allSettled([objPromise, arrPromise, funcPromise, rejectedPromise]);
+const settlingPromises = Promise.allSettled([objPromise, arrPromise, funcPromise /*, rejectedPromise */]);
 console.log(settlingPromises);
 ```
 
 ### Promise.any(iterable)
 
 ```javascript
-const anyPromises = Promise.any([arrPromise, objPromise, funcPromise, rejectedPromise]);
-console.log(anyPromises);
-anyPromises.then((data) => {
-  console.log(data);
-})
+const anyPromises = Promise.any([objPromise, arrPromise, funcPromise /*, rejectedPromise */]);
+console.log(settlingPromises);
 ```
 
 ### Degenerate Situations
@@ -89,8 +86,7 @@ console.log('promise', promise);
 ## Thoughts and Questions
 
 - Promise.allSettled() appears to remain pending. Should it do that?
-- The point might be that I can use the resolved value.
-  - After the value is used, the anyPromise variable is changed to "fulfilled" with a value of undefined
+
 
 
 
