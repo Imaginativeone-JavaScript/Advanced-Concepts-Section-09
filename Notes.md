@@ -44,15 +44,143 @@
 
 		```javascript
 		async function playerStart() {
-			const firstMove = await .then(() => movePlayer(400, 'Left')); // pause
-			await .then(() => movePlayer(400, 'Left'));		// pause
-			await .then(() => movePlayer( 10, 'Right')); 	// pause
-			await .then(() => movePlayer(330, 'Left')); 	// pause
+			// const firstMove = await .then(() => movePlayer(400, 'Left')); 	// pause
+			const first  = await .then(() => movePlayer(400, 'Left')); 				// pause
+			const second = await .then(() => movePlayer(400, 'Left'));				// pause
+			await .then(() => movePlayer( 10, 'Right')); 											// pause
+			await .then(() => movePlayer(330, 'Left')); 											// pause
+		}
+		```
+
+		## Getting data from the web (Promise Version)
+
+		```javascript
+		fetch() // I get a Promise
+		// https://jsonplaceholder.typicode.com/users
+		fetch('https://jsonplaceholder.typicode.com/users')
+			.then(resp => resp.json())
+			.then(console.log)
+		```
+
+		## Getting data from the web (async/await Version)
+
+		```javascript
+		// https://jsonplaceholder.typicode.com/users
+		async function fetchUsers() {
+			const resp = await fetch('https://jsonplaceholder.typicode.com/users')
+			const data = await resp.json();
+			console.log('data', data);
+		}
+		```
+
+		## Another Example
+
+		```javascript
+		const urls = [
+			'https://jsonplaceholder.typicode.com/users',
+			'https://jsonplaceholder.typicode.com/posts',
+			'https://jsonplaceholder.typicode.com/albums'
+		]
+
+		const getData = async function() {
+
+			const [users, posts, albums] = await Promise.all(
+				urls.map(
+					url => fetch(url).then(resp => resp.json())
+				)
+			)
+			console.log('users', 	users);
+			console.log('posts', 	posts);
+			console.log('albums', albums);
+		}
+		```
+
+		## try/catch Error Handling
+		
+		```javascript
+		const urls = [
+			'https://jsonplaceholder.typicode.com/users',
+			'https://jsonplaceholde.typicode.com/posts',	// Erroneous URL
+			'https://jsonplaceholder.typicode.com/albums'
+		]
+
+		const getData = async function() {
+			try {
+				const [users, posts, albums] = await Promise.all(
+					urls.map(
+						url => fetch(url).then(resp => resp.json())
+					)
+				)
+				console.log('users', 	users);
+				console.log('posts', 	posts);
+				console.log('albums', albums);
+			}
+			catch(err) {
+				console.log('Oops', err);
+			}
 		}
 		```
 
 	- [ ] 138225 09-06-10 0521 ES9 (ES2018)
+	  - Object spread operator
+
+		```javascript
+		const animals = {
+			tiger: 23,
+			lion: 5,
+			monkey: 2,
+			bird: 40
+		}
+
+		// const { tiger, ...nontigers } = animals;
+		
+		function objectSpread(p1, p2, p3) {
+			console.log('p1', p1);	
+			console.log('p2', p2);	
+			console.log('p3', p3);	
+		}
+
+		const { tiger, lion, ...rest } = animals;
+
+		console.log(tiger);
+		console.log(rest);
+
+		objectSpread(tiger, lion, rest);
+		```
+
 	- [ ] 139225 09-07-10 1111 ES9 (ES2018) - Async
+
+		```javascript
+		const urls = [
+			'https://swapi.dev/api/people/1',
+			'https://swapi.dev/api/people/2',
+			'https://swapi.dev/api/people/3',
+			'https://swapi.dev/api/people/4',
+		];
+
+		Promise.all(
+			urls.map(
+				url => {
+					return fetch(url).then(people => people.json())
+				}
+			)
+		)
+		.then((array) => {
+			console.log('1', array[0]);
+		});
+
+		function mapThis() {
+			urls.map((url) => {
+				// console.log(url);
+				const f = fetch(url);
+				f.then((people) => {
+					console.log('data', people.json())
+				})
+				console.log(f);
+				// return fetch(url).then(people => people.json())
+			})
+		}
+		```
 
 	- [ ] 140225 09-08-10 0655 Job Queue
 	  - The addition of Promises in ES6 required changes in the Event Loop
