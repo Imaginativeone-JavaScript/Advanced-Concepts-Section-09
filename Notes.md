@@ -45,20 +45,20 @@
 		```javascript
 		async function playerStart() {
 			// const firstMove = await .then(() => movePlayer(400, 'Left')); 	// pause
-			const first  = await .then(() => movePlayer(400, 'Left')); 				// pause
-			const second = await .then(() => movePlayer(400, 'Left'));				// pause
-			await .then(() => movePlayer( 10, 'Right')); 											// pause
-			await .then(() => movePlayer(330, 'Left')); 											// pause
+			const first  = await .then(() => movePlayer(400, 'Left')); 			// pause
+			const second = await .then(() => movePlayer(400, 'Left'));			// pause
+			await .then(() => movePlayer( 10, 'Right')); 						// pause
+			await .then(() => movePlayer(330, 'Left')); 						// pause
 		}
 		```
 
 		## Getting data from the web (Promise Version)
 
 		```javascript
-		fetch() // I get a Promise
+		// fetch() // I get a Promise
 		// https://jsonplaceholder.typicode.com/users
 		fetch('https://jsonplaceholder.typicode.com/users')
-			.then(resp => resp.json())
+			.then(userAccountResolution => userAccountResolution.json())
 			.then(console.log)
 		```
 
@@ -67,8 +67,8 @@
 		```javascript
 		// https://jsonplaceholder.typicode.com/users
 		async function fetchUsers() {
-			const resp = await fetch('https://jsonplaceholder.typicode.com/users')
-			const data = await resp.json();
+			const userAccountResolution = await fetch('https://jsonplaceholder.typicode.com/users')
+			const data = await userAccountResolution.json();
 			console.log('data', data);
 		}
 		```
@@ -86,7 +86,7 @@
 
 			const [users, posts, albums] = await Promise.all(
 				urls.map(
-					url => fetch(url).then(resp => resp.json())
+					url => fetch(url).then(userAccountResolution => userAccountResolution.json())
 				)
 			)
 			console.log('users', 	users);
@@ -108,7 +108,7 @@
 			try {
 				const [users, posts, albums] = await Promise.all(
 					urls.map(
-						url => fetch(url).then(resp => resp.json())
+						url => fetch(url).then(userAccountResolution => userAccountResolution.json())
 					)
 				)
 				console.log('users', 	users);
@@ -181,19 +181,22 @@
 		## for/await/of
 
 		```javascript
-		const urls = [
-			'https://jsonplaceholder.typicode.com/users',
-			'https://jsonplaceholder.typicode.com/posts',
-			'https://jsonplaceholder.typicode.com/albums'
-		]
+		function exploreAsyncFor() {
+			const urls = [
+				'https://jsonplaceholder.typicode.com/users',
+				'https://jsonplaceholder.typicode.com/posts',
+				'https://jsonplaceholder.typicode.com/albums'
+			]
 
-		const getData2 = async function() {
-			const arrayPromises = urls.map(url => fetch(url) );
-			for await (let request of arrayPromises) {
-				const data = await request.json();
-				console.log('data', data);
+			const getData2 = async function() {
+				const arrayPromises = urls.map(url => fetch(url) );
+				for await (let request of arrayPromises) {
+					const data = await request.json();
+					console.log('data', data);
+				}
+				return arrayPromises;
 			}
-			return arrayPromises;
+			getData2();
 		}
 		```
 
