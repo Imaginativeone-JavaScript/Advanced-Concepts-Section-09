@@ -186,38 +186,14 @@
 			'https://jsonplaceholder.typicode.com/posts',
 			'https://jsonplaceholder.typicode.com/albums'
 		]
-		const getData = async function() {
-			try {
-				const [users, posts, albums] = await Promise.all(
-					urls.map(
-						url => fetch(url).then(resp => resp.json())
-					)
-				)
-				console.log('users', 	users);
-				console.log('posts', 	posts);
-				console.log('albums', albums);
-			}
-			catch(err) {
-				console.log('Oops', err);
-			}
-		}
-
-		const loopThroughUrls = url => {
-			for (url of urls) {
-				console.log('for-example', url);
-			}
-		}
 
 		const getData2 = async function() {
-			const m = urls.map((url) => {
-
-			/*	const f = fetch(url)
-					.then(resp => resp.json())
-					.then(console.log)
-			*/
-				return fetch(url);
-			});			
-			return m;
+			const arrayPromises = urls.map(url => fetch(url) );
+			for await (let request of arrayPromises) {
+				const data = await request.json();
+				console.log('data', data);
+			}
+			return arrayPromises;
 		}
 		```
 
